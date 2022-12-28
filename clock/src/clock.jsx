@@ -40,6 +40,9 @@ export function Clock(props) {
         return `rotate(${hour * 30}, 200, 200)`
     }
     const color = hour => ['blue', 'yellow', 'pink'][hour % 3];
+    const move = hour => console.log(hour);
+    
+    const handler = (data, event) => console.log(data);
 
     return (
         <div > 
@@ -72,7 +75,7 @@ export function Clock(props) {
                     // let a = "rotate(240, 200, 200)";
                     
                     <path d={d2} stroke="none" fill={color(i)} stroke-width="1" 
-                        onclick="alert('!')" transform={rotate(i)}
+                        onClick={[handler, i]} transform={rotate(i)}
                         style />   
                     }
                  </For>
