@@ -1,12 +1,6 @@
 export function Clock(props) {
 
-    const rx = 0;
-
-
-    const r = polarToCartesian(200, 200, 200, 45);
-    const r1 = 200 + 200 * Math.cos(0)
-    const r2 = 200 + 200 * Math.sin(Math.PI / 6);
-    
+   
     function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
         var angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
         
@@ -30,17 +24,20 @@ export function Clock(props) {
     
         return d;       
     }
-    const d = describeArc(200, 200, 200, 0, 30);
-    const d2 = `M 200,200 L 200, 0 ${describeArc(200, 200, 200, 0, 30)} L 200,200 `;
+    const R = 200
+    const d = `${describeArc(R, R, R, 0, 30)} L ${R},${R}`;
+   
+    const R2 = 50;
+    const i = 0;
+    const d2 =`${describeArc(R2, R2, R2, i * 30, i * 30 + 30 )} L ${R2} ${R2} `
 
-    const angle = "rotate(60, 200, 200)"
-    const x = "rotate(240, 200, 200)";
 
+    function click() { alert("clicked!") }
     function rotate(hour) {
         return `rotate(${hour * 30}, 200, 200)`
     }
     const color = hour => ['blue', 'yellow', 'pink'][hour % 3];
-    const move = hour => console.log(hour);
+    // const move = hour => console.log(hour);
     
     const handler = (data, event) => console.log(data);
 
@@ -48,35 +45,38 @@ export function Clock(props) {
         <div > 
             <header>{props.name}
                 <p>d = "{d}"</p>
-                <p>r1 = {r1}</p>
-                <p>r2 = {r2}</p>
+                <p>d2 = "{d2}"</p>
+           
 
-                <For each={[0,1,2]}>{ i => {
-                    let index = i;
-                    <div>
-                        i = {index}
-                    </div>
-                    }
-                }</For>
+        
             </header>
             {/* <div style="background-color:bisque; min-height:200px; xwidth:200px"> */}
             
             
-
-            <svg height="400" width="400"  style="background-color:bisque;"> 
-                 {/* <circle cx="50%" cy="50%" r="50%" stroke="black" 
-                    stroke-width="1" fill="yellow" />  */}
+            {/* <svg height="400" width="400"   style="background-color:bisque;"> 
+            
 
   
-                    <path d={d2} stroke="none" fill="grey" stroke-width="1" 
-                        onclick="alert('!')" transform={rotate(6)} />   
-
-                <For each={[0,1,2,3,4,5,6,7,8,9,10,11]}>{ i =>  
-                    // let a = "rotate(240, 200, 200)";
-                    
-                    <path d={d2} stroke="none" fill={color(i)} stroke-width="1" 
-                        onClick={[handler, i]} transform={rotate(i)}
+                <For each={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}>{ i =>  
+                   
+                    <path d={`${describeArc(R, R, R, i * 30, i * 30 + 30 )} L ${R},${R} `}  stroke="none" fill={color(i)} stroke-width="1" 
+                        onClick="{click}" xtransform="rotate(90)}"
                         style />   
+                    }
+                 </For>
+            </svg> */}
+<hr></hr>
+            <svg height="400" width="400" viewBox="0 0 100 100"  style="background-color:bisque;"> 
+                  {/* <circle cx="50" cy="50" r="50" stroke="black" 
+                    stroke-width="1" fill="yellow" />   */}
+
+  
+                <For each={[0]}>{ i =>  
+                    <path d="M 75 6.698729810778069 A 50 50 0 0 0 50 0 L 50 50" stroke="none" fill={color(i)} stroke-width="1" />   
+                
+                    // <path d={`${describeArc(R2, R2, R2, i * 30, i * 30 + 30 )} L ${R2},${R2} `}  stroke="none" fill={color(i)} stroke-width="1" 
+                    //     onClick="{click}" xtransform="rotate(90)}"
+                    //     style />   
                     }
                  </For>
             </svg>
