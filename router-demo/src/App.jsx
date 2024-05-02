@@ -1,4 +1,4 @@
-//import { Routes, Route } from "@solidjs/router";
+import { Routes, Route } from "@solidjs/router";
 import { Home } from "./pages/Home";
 
 function App() {
